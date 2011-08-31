@@ -4,7 +4,7 @@ $:.unshift lib unless $:.include?(lib)
 
 Gem::Specification.new do |s|
   s.name        = "activevalidators"
-  s.version     = '1.5.1.2.copious'
+  s.version     = '1.5.1.3.copious'
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Franck Verrot", "Paco Guzmán", "Oriol Gual", "Garrett Bjerkhoel", "Renato Riccieri Santos Zannon", "Brian Moseley"]
   s.email       = ["franck@verrot.fr"]
