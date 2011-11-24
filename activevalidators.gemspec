@@ -17,8 +17,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "minitest"
   s.add_development_dependency "turn"
   s.add_dependency 'rake'          , '>= 0.8.7'
-  s.add_dependency 'activerecord'  , '>= 3.0.0'
-  s.add_dependency 'activemodel'   , '>= 3.0.0'
+  s.add_dependency 'activerecord'  , '~> 3.1.0'
+  s.add_dependency 'activemodel'   , '~> 3.1.0'
   s.add_dependency 'mail'
   s.add_dependency 'date_validator'
 
