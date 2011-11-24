@@ -2,7 +2,9 @@
 rvm:
   - 1.8.7
   - 1.9.2
+  - 1.9.3
   - ruby-head
   - ree
-  #- rbx # Uncomment when tests will pass locally
-  #- rbx-2.0 # Uncomment when tests will pass locally
+  - rbx
+  - rbx-2.0
+  - jruby

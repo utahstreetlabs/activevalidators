@@ -1,4 +1,4 @@
-ActiveValidators [![Travis](http://travis-ci.org/cesario/activevalidators.png)](http://travis-ci.org/cesario/activevalidators)
+ActiveValidators [![Travis](https://secure.travis-ci.org/cesario/activevalidators.png)](http://travis-ci.org/cesario/activevalidators)
 ================
 
 Collection of ActiveModel/ActiveRecord validations
@@ -12,6 +12,7 @@ In your Gemfile ( >>= 1.1.0 ):
 
 In your models, the gem provides new validators like `email`, or `url`:
 
+```ruby
     class User
       validates :email_address, :email => true
       validates :link_url,      :url   => true
@@ -38,6 +39,7 @@ In your models, the gem provides new validators like `email`, or `url`:
     end
 
     class Account
+      validates :any_card,      :credit_card => true
       validates :visa_card,     :credit_card => { :type => :visa }
       validates :credit_card,   :credit_card => { :type => :any  }
     end
@@ -45,21 +47,22 @@ In your models, the gem provides new validators like `email`, or `url`:
     class Order
       validates :tracking_num,  :tracking_number => { :carrier => :ups }
     end
-
+```
 
 Exhaustive list of supported validators and their implementation:
 
-* `email` : based on the `mail` gem
-* `url`   : based on a regular expression
-* `phone` : based on a set of predefined masks
-* `twitter` : based on a regular expression
-* `slug`  : based on `ActiveSupport::String#parameterize`
-* `ip`    : based on `Resolv::IPv[4|6]::Regex`
 * `credit_card` : based on the `Luhn` algorithm
 * `date`  : based on the `DateValidator` gem
+* `email` : based on the `mail` gem
+* `ip`    : based on `Resolv::IPv[4|6]::Regex`
 * `password` : based on a set of regular expressions
+* `phone` : based on a set of predefined masks
 * `postal_code`: based on a set of predefined masks
+* `respond_to`
+* `slug`  : based on `ActiveSupport::String#parameterize`
 * `tracking_number`: based on a set of predefined masks
+* `twitter` : based on a regular expression
+* `url`   : based on a regular expression
 
 Todo
 ----
@@ -89,6 +92,8 @@ Contributors
 * Garrett Bjerkhoel
 * Renato Riccieri Santos Zannon
 * Brian Moseley
+* Travis Vachon
+* Rob Zuber
 
 Copyright
 ---------
