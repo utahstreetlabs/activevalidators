@@ -43,6 +43,10 @@ describe "Tracking Number Validation" do
       assert_valid_tracking_number({:carrier => :ups}, 'T99F99E9999')
     end
 
+    it 'should validate format of tracking number with K..........' do
+      assert_valid_tracking_number({:carrier => :ups}, 'K2017710193')
+    end
+
     it 'should validate format of tracking number with .........' do
       assert_valid_tracking_number({:carrier => :ups}, '990728071')
     end
@@ -75,6 +79,14 @@ describe "Tracking Number Validation" do
       it '22 character USS128 tracking number with valid MOD10 check digit' do
         assert_valid_tracking_number({:carrier => :usps}, '9171969010756003077385')
       end
+
+      it 'USS39 tracking number with "CN" product id' do
+        assert_valid_tracking_number({:carrier => :usps}, 'RA200845802CN')
+      end
+
+      it 'USS39 tracking number with "HK" product id' do
+        assert_valid_tracking_number({:carrier => :usps}, 'RT200845802HK')
+      end
     end
 
     describe "with invalid formats" do
@@ -90,7 +102,7 @@ describe "Tracking Number Validation" do
         assert_invalid_tracking_number({:carrier => :usps}, 'EAB123456784US')
       end
 
-      it 'USS39 tracking number with non-"US" product id' do
+      it 'USS39 tracking number with non-"US, CN, HK" product id' do
         assert_invalid_tracking_number({:carrier => :usps}, 'EA123456784UT')
       end
 
