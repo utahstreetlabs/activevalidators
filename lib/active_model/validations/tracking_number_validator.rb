@@ -12,7 +12,7 @@ module ActiveModel
       # UPS:
       # ups tracking codes are validated solely on their format
       # see https://www.ups.com/content/us/en/tracking/help/tracking/tnh.html
-      UPS_REGEXES = [ /^1Z[a-zA-Z0-9]{16}$/, /^[a-zA-Z0-9]{12}$/, /^[a-zA-Z0-9]{9}$/, /^T[a-zA-Z0-9]{10}$/ ]
+      UPS_REGEXES = [ /^1Z[a-zA-Z0-9]{16}$/, /^[a-zA-Z0-9]{12}$/, /^[a-zA-Z0-9]{9}$/, /^[TK][a-zA-Z0-9]{10}$/ ]
       def valid_ups?(value)
         !!UPS_REGEXES.detect { |fmt| value.match(fmt) }
       end
@@ -28,13 +28,13 @@ module ActiveModel
         uss228?(value) || uss39?(value)
       end
 
-      USS128_REGEX = /^(\d{19,21})(\d)$/
+      USS128_REGEX = /^(?:\d{2})??(\d{19,21})(\d)$/
       def uss228?(value)
         m = value.match(USS128_REGEX)
         m.present? && (m[2].to_i == usps_mod10(m[1]))
       end
 
-      USS39_REGEX = /^[a-zA-Z0-9]{2}(\d{8})(\d)US$/
+      USS39_REGEX = /^[a-zA-Z0-9]{2}(\d{8})(\d)(?:US|CN|HK)$/
       def uss39?(value)
         m = value.match(USS39_REGEX)
         # it appears to be valid for a USS39 barcode's checkdigit to be calculated with either the usps mod 10
