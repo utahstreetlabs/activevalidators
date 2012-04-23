@@ -31,7 +31,22 @@ module ActiveModel
       USS128_REGEX = /^(\d{19,21})(\d)$/
       def uss228?(value)
         m = value.match(USS128_REGEX)
-        m.present? && (m[2].to_i == usps_mod10(m[1]))
+        return true if m.present? && (m[2].to_i == usps_mod10(m[1]))
+        
+        # Many USPS documents only include a 20-digit tracking number, omitting the 
+        # 2-digit "application identifier."  USPS's tracking website can handle these, even
+        # though they usually fail the checksum test.  We try the most common application
+        # identifiers (91-95) and allow the tracking number to be marked as valid if
+        # prepending any of these to the given tracking number results in a valid checksum.
+        if value.length == 20
+          (91..95).each do |ai|
+            m = "#{ai}#{value}".match(USS128_REGEX)
+            return true if m.present? && (m[2].to_i == usps_mod10(m[1]))
+          end
+        end
+
+        # No match.
+        false
       end
 
       USS39_REGEX = /^[a-zA-Z0-9]{2}(\d{8})(\d)(?:US|CN|HK)$/

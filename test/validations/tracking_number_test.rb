@@ -80,6 +80,10 @@ describe "Tracking Number Validation" do
         assert_valid_tracking_number({:carrier => :usps}, '9171969010756003077385')
       end
 
+      it '20 character USS128 tracking number that fails validation without application identifier 91 prefix' do
+        assert_valid_tracking_number({:carrier => :usps}, '71969010756003077385')
+      end
+
       it 'USS39 tracking number with "CN" product id' do
         assert_valid_tracking_number({:carrier => :usps}, 'RA200845802CN')
       end
@@ -107,7 +111,7 @@ describe "Tracking Number Validation" do
       end
 
       it 'USS128 tracking number with invalid check-digit' do
-        assert_invalid_tracking_number({:carrier => :usps}, '71123456789123456788')
+        assert_invalid_tracking_number({:carrier => :usps}, '71123456789123456780')
       end
 
       it 'USS128 tracking number that is too short' do
